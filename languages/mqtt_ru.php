@@ -18,3 +18,10 @@ $dictionary=array(
 );
 
 foreach ($dictionary as $k=>$v) { if (!defined("LANG_".$k)) { define("LANG_".$k, $v); } }
+
+if (!defined('LANG_MQTT_MANUAL')) define('LANG_MQTT_MANUAL', 'Мануал');
+if (!defined('LANG_MQTT_MANUAL_TEXT')) define('LANG_MQTT_MANUAL_TEXT', 'Instruction is available below.');
+if (!defined('LANG_MQTT_MANUAL_STEP1')) define('LANG_MQTT_MANUAL_STEP1', 'Use read-only discovery first.');
+if (!defined('LANG_MQTT_MANUAL_STEP2')) define('LANG_MQTT_MANUAL_STEP2', 'Сначала используйте поиск только для чтения.');
+if (!defined('LANG_MQTT_MANUAL_STEP3')) define('LANG_MQTT_MANUAL_STEP3', 'Спочатку використовуйте пошук лише для читання.');
+if (!defined('LANG_MQTT_MANUAL_FULL')) define('LANG_MQTT_MANUAL_FULL', 'Полный мануал');

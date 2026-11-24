@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<module>
+ <name>mqtt</name>
+ <title>MQTT v2</title>
+ <title_ru>MQTT v2</title_ru>
+ <category>devices</category>
+ <author>mambursoft</author>
+ <url>https://github.com/mambursoft/majordomo-mqtt-v2</url>
+ <version>2.0.0</version>
+ <description>Modern MQTT bridge for MajorDoMo: layered transport, validated topics, responsive UI and full en/ru/uk localization.</description>
+ <description_ru>Modern MQTT bridge for MajorDoMo: layered transport, validated topics, responsive UI and full en/ru/uk localization.</description_ru>
+ <support>https://github.com/mambursoft/majordomo-mqtt-v2/issues</support>
+ <requires></requires>
+</module>

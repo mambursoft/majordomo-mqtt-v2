@@ -1,0 +1,14 @@
+{
+  "name": "mqtt",
+  "title": "MQTT v2",
+  "module_name": "mqtt",
+  "version": "2.0.0",
+  "category": "devices",
+  "author": "mambursoft",
+  "support": "https://github.com/mambursoft/majordomo-mqtt-v2/issues",
+  "repository": "https://github.com/mambursoft/majordomo-mqtt-v2",
+  "min_php": "7.3",
+  "tested_php": "8.2",
+  "description": "Modern MQTT bridge for MajorDoMo: layered transport, validated topics, responsive UI and full en/ru/uk localization.",
+  "languages": ["en", "ru", "uk"]
+}
