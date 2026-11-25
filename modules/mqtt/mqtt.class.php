@@ -830,7 +830,8 @@ class mqtt extends module
                 global $ids;
                 $qry = '1';
                 if (is_array($ids)) {
-                    $qry .= " AND mqtt.ID IN (" . implode(',', $ids) . ")";
+                    $safeIds = array_map("intval", $ids);
+                    $qry .= " AND mqtt.ID IN (" . implode(",", $safeIds) . ")";
                 } elseif ($ids == 'all') {
                     $qry = '1';
                 } else {
