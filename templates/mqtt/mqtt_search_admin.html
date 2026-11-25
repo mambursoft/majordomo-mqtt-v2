@@ -150,6 +150,15 @@
                                 </label>
                                 <div class="col-lg-10 col-md-8">
                                         <input type="text" name="mqtt_delay" value="<#MQTT_DELAY#>" placeholder="5" class="form-control">
+</div>
+<div class="form-group">
+ <label><#LANG_MQTT_STATUS_TOPIC#></label>
+ <input type="text" name="mqtt_status_topic" value="<#MQTT_STATUS_TOPIC#>" placeholder="majordomo/status" class="form-control">
+</div>
+<div class="form-group">
+ <label><input type="checkbox" name="mqtt_retain" value="1"[#if MQTT_RETAIN="1"#] checked[#endif#]> <#LANG_MQTT_RETAIN#></label>
+</div>
+<div class="form-group">
                                 </div>
                         </div>
 

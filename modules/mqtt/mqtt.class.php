@@ -247,6 +247,9 @@ class mqtt extends module
     {
         startMeasure('mqttPublish');
         $this->getConfig();
+        if (func_num_args() < 4 && !empty($this->config['MQTT_RETAIN'])) {
+            $retain = 1;
+        }
         if ($write_type == 0 && $this->config['MQTT_WRITE_METHOD']) {
             $write_type = 2;
         }
@@ -638,6 +641,8 @@ class mqtt extends module
         $out['MQTT_PORT'] = $this->config['MQTT_PORT'];
         $out['MQTT_QUERY'] = $this->config['MQTT_QUERY'];
         $out['MQTT_DELAY'] = $this->config['MQTT_DELAY'];
+        $out['MQTT_STATUS_TOPIC'] = isset($this->config['MQTT_STATUS_TOPIC']) ? $this->config['MQTT_STATUS_TOPIC'] : 'majordomo/status';
+        $out['MQTT_RETAIN'] = isset($this->config['MQTT_RETAIN']) ? (int)$this->config['MQTT_RETAIN'] : 0;
         $out['MQTT_WRITE_METHOD'] = isset($this->config['MQTT_WRITE_METHOD']) ? (int)$this->config['MQTT_WRITE_METHOD'] : 0;
         $out['MQTT_STRIPMODE'] = isset($this->config['MQTT_STRIPMODE']) ? $this->config['MQTT_STRIPMODE'] : 0;
         $out['DEBUG_MODE'] = $this->config['DEBUG_MODE'];
@@ -670,6 +675,9 @@ class mqtt extends module
             $this->config['MQTT_AUTH'] = gr('mqtt_auth', 'int');
             $this->config['MQTT_PORT'] = gr('mqtt_port', 'int');
             $this->config['MQTT_QUERY'] = gr('mqtt_query');
+            $status_topic = trim((string)gr('mqtt_status_topic'));
+            $this->config['MQTT_STATUS_TOPIC'] = $status_topic !== '' ? preg_replace('/[^A-Za-z0-9_\/:-]/', '', $status_topic) : 'majordomo/status';
+            $this->config['MQTT_RETAIN'] = gr('mqtt_retain', 'int') ? 1 : 0;
             $this->config['MQTT_WRITE_METHOD'] = gr('mqtt_write_method', 'int');
             $this->config['MQTT_STRIPMODE'] = gr('mqtt_stripmode', 'int');
             $this->config['DEBUG_MODE'] = gr('debug_mode', 'int');

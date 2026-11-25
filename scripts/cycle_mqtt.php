@@ -65,19 +65,26 @@ if (isset($mqtt->config['MQTT_DELAY'])) {
     $mqtt_delay = 5;
 }
 
+// Home Assistant-style birth and last will: retained status topic.
+$status_topic = isset($mqtt->config['MQTT_STATUS_TOPIC']) && $mqtt->config['MQTT_STATUS_TOPIC']
+    ? $mqtt->config['MQTT_STATUS_TOPIC']
+    : 'majordomo/status';
+$will = array('topic' => $status_topic, 'msg' => 'offline', 'qos' => 0, 'retain' => true);
+
 $mqtt_client = new Bluerhinos\phpMQTT($host, $port, $client_name);
 
 if ($mqtt->config['MQTT_AUTH']) {
-    $connect = $mqtt_client->connect(true, NULL, $username, $password);
+    $connect = $mqtt_client->connect(true, $will, $username, $password);
     if (!$connect) {
         exit(1);
     }
 } else {
-    $connect = $mqtt_client->connect();
+    $connect = $mqtt_client->connect(true, $will);
     if (!$connect) {
         exit(1);
     }
 }
+$mqtt_client->publish($status_topic, 'online', 0, true);
 
 $query_list = explode(',', $query);
 $total = count($query_list);
@@ -131,6 +138,7 @@ while ($mqtt_client->proc()) {
         setGlobal((str_replace('.php', '', basename(__FILE__))) . 'Run', time(), 1);
         if (file_exists('./reboot') || isset($_GET['onetime'])) {
 
+            $mqtt_client->publish($status_topic, 'offline', 0, true);
             $mqtt_client->close();
             $db->Disconnect();
             exit;
@@ -138,6 +146,7 @@ while ($mqtt_client->proc()) {
     }
 }
 
+$mqtt_client->publish($status_topic, 'offline', 0, true);
 $mqtt_client->close();
 
 /**
